@@ -23,7 +23,7 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    params[:description] = 'Place Holder'
+    params[:description] = '-'
     params[:status] = 'In Progress'
     application = Application.create(application_params)
     if application.save
