@@ -14,7 +14,7 @@ RSpec.describe 'the applications index' do
     expect(page).to have_content(application.city)
     expect(page).to have_content(application.state)
     expect(page).to have_content(application.zipcode)
-    expect(page).to_not have_content(application.description)
+    expect(page).to have_content(application.description)
     expect(page).to have_content(application.status)
     expect(page).to_not have_content(pet_3.name)
     click_link "#{pet_1.name}"
