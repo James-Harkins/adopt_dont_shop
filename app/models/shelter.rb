@@ -55,21 +55,21 @@ class Shelter < ApplicationRecord
 
   def action_required_pets
     pets.joins(:application_pets, :applications)
-    .select("pets.*")
+    .select("pets.*, applications.id AS application_id")
     .where("application_pets.status = 0 AND applications.status = 'Pending'")
   end
 
-  def action_required_applications
-    action_required = []
-    action_required_pets.each do |pet|
-      pet.application_pets.each do |application_pet|
-        if Application.find(application_pet.application_id).status == "Pending"
-          action_required << Application.find(application_pet.application_id)
-        end
-      end
-    end
-    action_required
-  end
+  # def action_required_applications
+  #   action_required = []
+  #   action_required_pets.each do |pet|
+  #     pet.application_pets.each do |application_pet|
+  #       if Application.find(application_pet.application_id).status == "Pending"
+  #         action_required << Application.find(application_pet.application_id)
+  #       end
+  #     end
+  #   end
+  #   action_required
+  # end
 
   def adopted_pet_count
     pets.where(adoptable: false).count
